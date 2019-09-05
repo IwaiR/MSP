@@ -41,11 +41,11 @@ def postplayingDataDB(accountID,playingTitle,performer,poet,composer,postDate,pl
             db["conn"].commit()
             result=True
         except:
-            result=False
             db["conn"].rollback()
+            result=False
     except:
-        result=False
         db["conn"].rollback()
+        result=False
     DB.close(db)
     return result
 
@@ -54,6 +54,6 @@ def postplayingDataDB(accountID,playingTitle,performer,poet,composer,postDate,pl
 
 
 # test
-print(getplayingListDB())
-print(getplayingDetailDB("PL00000001"))
+# print(getplayingListDB())
+# print(getplayingDetailDB("PL00000001"))
 # print(postplayingDataDB("0000000001","playing","test","test","test","2019-01-01","test.txt"))

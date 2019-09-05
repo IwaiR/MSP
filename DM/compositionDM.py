@@ -7,7 +7,7 @@ compositiondetail_tb="compositiondetail_tb"
 def getCompositionListDB():
     db=DB.access()
     db["cur"].execute("""
-    select * from {0}
+    select * from {0};
     """.format(composition_tb))
     result=db["cur"].fetchall()
     DB.close(db)
@@ -41,11 +41,11 @@ def postCompositionDataDB(accountID,compositionTitle,composer,postDate,compositi
             db["conn"].commit()
             result=True
         except:
-            result=False
             db["conn"].rollback()
+            result=False
     except:
-        result=False
         db["conn"].rollback()
+        result=False
     DB.close(db)
     return result
 
@@ -54,6 +54,6 @@ def postCompositionDataDB(accountID,compositionTitle,composer,postDate,compositi
 
 
 # test
-print(getCompositionListDB())
-print(getCompositionDetailDB("CO00000001"))
+# print(getCompositionListDB())
+# print(getCompositionDetailDB("CO00000001"))
 # print(postCompositionDataDB("0000000002","composition","test","2019-01-01","test.txt"))

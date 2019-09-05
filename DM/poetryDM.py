@@ -1,13 +1,13 @@
 # python poetryDM.py
 
-import mysql.connector,DB
+import mysql.connector,DB,myCollectionDM
 
 poetry_tb="poetry_tb"
 poetrydetail_tb="poetrydetail_tb"
 def getPoetryListDB():
     db=DB.access()
     db["cur"].execute("""
-    select * from {0}
+    select * from {0};
     """.format(poetry_tb))
     result=db["cur"].fetchall()
     DB.close(db)
@@ -21,7 +21,7 @@ def getPoetryDetailDB(poetryID):
     result=db["cur"].fetchall()
     DB.close(db)
     return result
-def postPoetryDataDB(accountID,poetryTitle,poet,postDate,poetryData_Path):
+def postPoetryDataDB(poetryTitle,poet,postDate,poetryData_Path):
     db=DB.access()
     try:
         db["cur"].execute("""
@@ -35,25 +35,36 @@ def postPoetryDataDB(accountID,poetryTitle,poet,postDate,poetryData_Path):
             db["cur"].execute("""
             insert into poetryDetail_TB(poetryID,poetryData_Path) values("{0}","{1}");
             """.format(id[0]["poetryID"],poetryData_Path))
-            db["cur"].execute("""
-            insert into mycollection_TB(accountID,myCollectionID) values("{0}","{1}");
-            """.format(accountID,id[0]["poetryID"]))
             db["conn"].commit()
-            result=True
+            result=id
         except:
-            result=False
             db["conn"].rollback()
+            result=False
     except:
-        result=False
         db["conn"].rollback()
+        result=False
     DB.close(db)
     return result
 
 
 
+# poetryController
+def postPoetryData(accountID,poetryTitle,poet,postDate,poetryData_Path):
+    #accountidを確認する処理が必要
+    result=postPoetryDataDB(poetryTitle,poet,postDate,poetryData_Path)
+    try:
+        id=result[0]["poetryID"]
+    except:
+        return False
+    result=myCollectionDM.postMycollectionDataDB(accountID,id)
+    return result
+    
+        
+
 
 
 # test
-print(getPoetryListDB())
-print(getPoetryDetailDB("P000000001"))
+# print(getPoetryListDB())
+# print(getPoetryDetailDB("PO00000001"))
 # print(postPoetryDataDB("0000000001","poetry","test","2019-01-01","test.txt"))
+# print(postPoetryData("00000000001","poetry","test","2019-01-01","test.txt"))

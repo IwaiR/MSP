@@ -41,11 +41,11 @@ def postmusicDataDB(accountID,musicTitle,poet,composer,contributor,postDate,poet
             db["conn"].commit()
             result=True
         except:
-            result=False
             db["conn"].rollback()
+            result=False
     except:
-        result=False
         db["conn"].rollback()
+        result=False
     DB.close(db)
     return result
 
@@ -54,6 +54,6 @@ def postmusicDataDB(accountID,musicTitle,poet,composer,contributor,postDate,poet
 
 
 # test
-print(getmusicListDB())
-print(getmusicDetailDB("MU00000001"))
+# print(getmusicListDB())
+# print(getmusicDetailDB("MU00000001"))
 # print(postmusicDataDB("0000000001","music","test","test","test","2019-01-01","test.txt","test.txt"))
