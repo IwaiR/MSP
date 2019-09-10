@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>アカウント新規登録</title>
+  </head>
+  <body>
+    <h1>アカウント新規登録</h1>
+    <p>__________________________</p>
+    <form action="/CreateAccount" method="post">
+    <p>ユーザID</p></br>
+    <input type="text" name="accountID" size="50" maxlength="30">
+    <p>UUID(32)</p></br>
+    <input type="text" name="UUID" size="50" maxlength="30">
+    <p>ユーザ名</p></br>
+    <input type="text" name="accountName" size="50" maxlength="30">
+    <p>得意分野</p></br>
+    <input type="radio" name="specialityID1" value="作詩が得意">作詩が得意
+    <input type="radio" name="specialityID2" value="作曲が得意">作曲が得意</br>
+    <input type="radio" name="specialityID3" value="楽器が得意">楽器が得意
+    <input type="radio" name="specialityID4" value="歌うのが得意">歌うのが得意</br>
+    <p>プロフィール写真</p>
+    <input type="text" name="profilePhoto_Path" size="50" maxlength="30">
+    <p>自己PR</p>
+    <input type="text" name="comment" size="50" maxlength="30">
+    <p>得意な楽器</p>
+    <input type="text" name="specialtyInstrument" size="50" maxlength="30">
+    <!-- <p>性別</p>
+    <select name="gender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    <p>年齢</p>
+    <select name="age">
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select> -->
+  <input type="submit" value="登録"/>
+  </form>
+<!--
+    <button type="button" name="forPlayingMain" onclick="playingMain.html">登録</button> -->
+  </body>
+</html>

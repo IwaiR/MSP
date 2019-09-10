@@ -1,0 +1,17 @@
+cmdにおいて
+
+特定のディレクトリで	
+git init (gitファイルができる)
+
+git add 追加したいファイル名
+
+git commit -m "コメント"
+
+git remote add origin https://github.com/IwaiR/MSP.git(GITのURL)
+
+git push origin master (アップロード)
+
+git pull origin master (ダウンロード)
+
+git status (状態の確認)
+

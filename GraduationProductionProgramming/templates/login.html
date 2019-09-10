@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ログイン画面</title>
+  </head>
+  <body>
+    <h1>ログイン</h1>
+    <p>__________________________</p>
+    <p>メールアドレス</p>
+    <input type="text" name="mailaddress" size="50" maxlength="30">
+    <p>パスワード</p>
+    <input type="password" name="password" size="50" maxlength="30">
+
+    <form action="/playingMain" method="post">
+      <input type="text" name="mailaddress" />
+      <input type="text" name="password" />
+      <input type="submit" value="ログイン"/>
+    </form>
+    <!--/loginに向けてpostメソッドでusernameとpasswordをsubmitで値をもって送る
+    -->
+    <button type="button" name="forCreateAccount" onclick="location.href='/CreateAccount'">新規登録はこちら</button>
+
+    <!--ConfirmationMailAddressを/ConfirmationMailAddressにする   無し！！-->
+  </body>
+</html>
