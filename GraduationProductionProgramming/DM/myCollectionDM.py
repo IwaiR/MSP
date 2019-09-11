@@ -1,27 +1,36 @@
 # python myCollectionDM.py
 
-import mysql.connector,DB
+import mysql.connector
+from mysql.connector import Error
+
+# import DB
+from DM import DB  # Main.py 実行時
 
 myCollection_tb="myCollection_tb"
+account_ms_columns=["accountID","UUID","accountName",
+"specialtyID","profilePhoto_Path","comment"
+,"specialtyInstrument"]
+myCollection_tb_columns=["accountID","myCollectionID"]
 def getMyCollectionDB(accountID):
     db=DB.access()
-    db["cur"].execute("""
+    db["cur_pre"].execute("""
     select * from myCollection_tb
     where accountID=?;
     """,(accountID,))
-    result=db["cur"].fetchall()
+    result=db["cur_pre"].fetchall()
+    result=DB.Convert_to_dict(myCollection_tb_columns,result)
     DB.close(db)
     return result
 def deleteMyCollectionDB(accountID,myCollectionID):
     db=DB.access()
     try:
-        db["cur"].execute("""
+        db["cur_pre"].execute("""
         delete from myCollection_tb
         where accountID=? and mycollectionID=?;
         """,(accountID,myCollectionID))
         db["conn"].commit()
         result=True
-    except:
+    except Error as e:
         db["conn"].rollback()
         result=False
     DB.close(db)
@@ -29,12 +38,12 @@ def deleteMyCollectionDB(accountID,myCollectionID):
 def postMycollectionDataDB(accountID,myCollectionID):
     db=DB.access()
     try:
-        db["cur"].execute("""
+        db["cur_pre"].execute("""
         insert into mycollection_TB(accountID,myCollectionID) values(?,?);
         """,(accountID,myCollectionID))
         db["conn"].commit()
         result=True
-    except:
+    except Error as e :
         db["conn"].rollback()
         result=False
     DB.close(db)
@@ -45,20 +54,25 @@ def postMycollectionDataDB(accountID,myCollectionID):
 # accountDM
 def getAccountinfoDB(UUID):
     db=DB.access()
-    db["cur"].execute("""
+    db["cur_pre"].execute("""
     select * from account_ms
     where UUID=?;
     """,(UUID,))
-    result=db["cur"].fetchall()
+    result=db["cur_pre"].fetchall()
     DB.close(db)
+    result=DB.Convert_to_dict(account_ms_columns,result)
     return result
-
+    
 
 
 # test
-UUID="uuid"
-accountID=getAccountinfoDB(UUID)[0][0]
-# print(accountID)
-# print(getMyCollectionDB(accountID))
+# UUID="uuid"
+# accountID="0000000001"
+# accountinfo=getAccountinfoDB(UUID)
+# print(accountinfo)
+# result=getMyCollectionDB(accountID)
+# print(result)
 # print(getAccountinfoDB(UUID))
 # print(deleteMyCollectionDB(accountID,"PL00000002"))
+# postMycollectionDataDB("11","dfghjkjhgfdfghjkjhs")
+
