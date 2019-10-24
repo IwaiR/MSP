@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint,render_template,redirect,url_for,request
-from DM import yobareru
+# from DM import yobareru
 app = Blueprint('yobu', __name__)
 def test2():
     yobareru.test()

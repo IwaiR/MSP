@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint,render_template,redirect,url_for, request
 import mysql.connector
-from DM import CreateAccountDM
+# from DM import CreateAccountDM
 #import 呼ぶファイル名
 app = Blueprint('CreateAccount', __name__)
 

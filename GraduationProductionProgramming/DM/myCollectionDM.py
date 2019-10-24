@@ -23,6 +23,13 @@ def getMyCollectionDB(accountID):
     return result
 def deleteMyCollectionDB(accountID,myCollectionID):
     db=DB.access()
+    db["cur_pre"].execute("""
+    select * from mycollection_tb
+    where accountID=? and mycollectionID=?;
+    """,(accountID,myCollectionID))
+    result=db["cur_pre"].fetchall()
+    if len(result)==0:
+        return False
     try:
         db["cur_pre"].execute("""
         delete from myCollection_tb
@@ -32,7 +39,7 @@ def deleteMyCollectionDB(accountID,myCollectionID):
         result=True
     except Error as e:
         db["conn"].rollback()
-        result=False
+        result=myCollection_tb+"\n"+str(e)
     DB.close(db)
     return result
 def postMycollectionDataDB(accountID,myCollectionID):
@@ -45,7 +52,7 @@ def postMycollectionDataDB(accountID,myCollectionID):
         result=True
     except Error as e :
         db["conn"].rollback()
-        result=False
+        result=myCollection_tb+"\n"+str(e)
     DB.close(db)
     return result
 
@@ -74,5 +81,5 @@ def getAccountinfoDB(UUID):
 # print(result)
 # print(getAccountinfoDB(UUID))
 # print(deleteMyCollectionDB(accountID,"PL00000002"))
-# postMycollectionDataDB("11","dfghjkjhgfdfghjkjhs")
+# print(postMycollectionDataDB("11","dfghjkjhgfdfghjkjhs"))
 

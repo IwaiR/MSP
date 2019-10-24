@@ -1,9 +1,16 @@
 # python compositionDM.py
 
-import mysql.connector,DB
+import mysql.connector
+from mysql.connector import Error
+
+# import DB,myCollectionDM
+from DM import DB  # Main.py 実行時
+
 
 composition_tb="composition_tb"
 compositiondetail_tb="compositiondetail_tb"
+composition_tb_columns=["initial","compositionID","compositionTitle","composer","postDate"]
+compositiondetail_tb_columns=["compositionID","compositionData_Path"]
 def getCompositionListDB():
     db=DB.access()
     db["cur_dic"].execute("select * from composition_tb;")
@@ -17,9 +24,10 @@ def getCompositionDetailDB(compositionID):
     where compositionID=?
     """,(compositionID,))
     result=db["cur_pre"].fetchall()
+    result=DB.Convert_to_dict(compositiondetail_tb_columns,result)
     DB.close(db)
     return result
-def postCompositionDataDB(accountID,compositionTitle,composer,postDate,compositionData_Path):
+def postCompositionDataDB(compositionTitle,composer,postDate,compositionData_Path):
     db=DB.access()
     try:
         db["cur_pre"].execute("""
@@ -33,17 +41,14 @@ def postCompositionDataDB(accountID,compositionTitle,composer,postDate,compositi
             db["cur_pre"].execute("""
             insert into compositionDetail_TB(compositionID,compositionData_Path) values(?,?);
             """,(id[0]["compositionID"],compositionData_Path))
-            db["cur_pre"].execute("""
-            insert into mycollection_TB(accountID,myCollectionID) values(?,?);
-            """,(accountID,id[0]["compositionID"]))
             db["conn"].commit()
-            result=True
-        except:
+            result=id
+        except Error as e:
             db["conn"].rollback()
-            result=False
-    except:
+            result=composition_tb+"\n"+str(e)
+    except Error as e:
         db["conn"].rollback()
-        result=False
+        result=composition_tb+"\n"+str(e)
     DB.close(db)
     return result
 
