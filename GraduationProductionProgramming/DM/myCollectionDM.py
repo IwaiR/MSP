@@ -58,20 +58,6 @@ def postMycollectionDataDB(accountID,myCollectionID):
 
 
 
-# accountDM
-def getAccountinfoDB(UUID):
-    db=DB.access()
-    db["cur_pre"].execute("""
-    select * from account_ms
-    where UUID=?;
-    """,(UUID,))
-    result=db["cur_pre"].fetchall()
-    DB.close(db)
-    result=DB.Convert_to_dict(account_ms_columns,result)
-    return result
-    
-
-
 # test
 # UUID="uuid"
 # accountID="0000000001"

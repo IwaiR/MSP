@@ -53,21 +53,6 @@ def postPoetryDataDB(poetryTitle,poet,postDate,poetryData_Path):
 
 
 
-# poetryController
-def postPoetryData(accountID,poetryTitle,poet,postDate,poetryData_Path):
-    #accountidを確認する処理が必要
-    result=postPoetryDataDB(poetryTitle,poet,postDate,poetryData_Path)
-    try:
-        id=result[0]["poetryID"]
-    except:
-        return False
-    result=myCollectionDM.postMycollectionDataDB(accountID,id)
-    return result
-    
-        
-
-
-
 # test
 # print(getPoetryListDB())
 # print(getPoetryDetailDB("PO00000001"))
