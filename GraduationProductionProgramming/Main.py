@@ -2,7 +2,9 @@ from flask import Flask
 import mysql.connector
 import os
 from func1 import(
-login, CreateAccount, playingMain, myPage,myCollection, yobu
+    login, CreateAccount, playingMain, myPage,myCollection, yobu,
+    accountController,myCollectionController,
+    poetryController,compositionController,musicController,playingController
 )
 
 app = Flask(__name__)
@@ -26,12 +28,18 @@ app.config['SECRET_KEY'] = os.urandom(24)
 #    return 'app1_playingMain'
 
 
-app.register_blueprint(login.app)
-app.register_blueprint(CreateAccount.app)
-app.register_blueprint(playingMain.app)
-app.register_blueprint(myPage.app)
-app.register_blueprint(myCollection.app)
-app.register_blueprint(yobu.app)
+# app.register_blueprint(login.app)
+# app.register_blueprint(CreateAccount.app)
+# app.register_blueprint(playingMain.app)
+# app.register_blueprint(myPage.app)
+# app.register_blueprint(myCollection.app)
+# app.register_blueprint(yobu.app)
+# app.register_blueprint(accountController.app)
+app.register_blueprint(myCollectionController.app)
+app.register_blueprint(poetryController.app)
+app.register_blueprint(compositionController.app)
+app.register_blueprint(musicController.app)
+app.register_blueprint(playingController.app)
 
 
 #yobu.test2()
@@ -40,7 +48,7 @@ app.register_blueprint(yobu.app)
 #app.register_blueprint(playingMain.app)
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='localhost', port=5000)
 
 #from app1.playingMain import app1
 #app.register_blueprint(app1, url_prefix='/app1')
