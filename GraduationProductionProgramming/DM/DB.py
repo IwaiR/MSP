@@ -2,7 +2,7 @@ import mysql.connector
 
 def access():
     db={}
-    conn = mysql.connector.connect(user="root", password='kamata', host='localhost', database='smp')
+    conn = mysql.connector.connect(user="root", password='kamata', host='localhost', database='msp')
     db["conn"]=conn
     db["cur_dic"]=conn.cursor(dictionary=True)
     db["cur_pre"]=conn.cursor(prepared=True)
