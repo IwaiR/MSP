@@ -29,7 +29,7 @@ def getMycollection():
     try:
         UUID=params["UUID"]
         try:
-            accountID=accountDM.getAccountinfoDB(UUID)[0]["accountID"]
+            accountID=accountDM.getAccountInfoDB(UUID)[0]["accountID"]
         except:
             return make_response(jsonify(myCollectionList))
         myCollectionList=myCollectionDM.getMyCollectionDB(accountID)
@@ -50,7 +50,7 @@ def deleteMyCollection():
         if not MyCollectionID.pattern_check(mycollectionID):
             return "Invalid mycollectionID"
         try:
-            accountID=accountDM.getAccountinfoDB(UUID)[0]["accountID"]
+            accountID=accountDM.getAccountInfoDB(UUID)[0]["accountID"]
         except:
             return make_response(jsonify(result))
         result=myCollectionDM.deleteMyCollectionDB(accountID,mycollectionID)
@@ -70,7 +70,7 @@ def postMycollectionData():
         if not MyCollectionID.pattern_check(mycollectionID):
             return "Invalid mycollectionID"
         try:
-            accountID=accountDM.getAccountinfoDB(UUID)[0]["accountID"]
+            accountID=accountDM.getAccountInfoDB(UUID)[0]["accountID"]
         except:
             return "does not exist UUID"
         result=myCollectionDM.postMycollectionDataDB(accountID,mycollectionID)

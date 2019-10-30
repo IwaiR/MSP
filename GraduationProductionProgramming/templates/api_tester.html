@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+        let pathList = [
+            "/accountContoller/registration?UUID=&accountName=&specialtyID=&profilePhoto_Path=&comment=&specialtyInstrument=",
+            "/accountContoller/getAccountInfo?UUID=",
+            "/accountContoller/updateAccountInfo?accountName=&specialtyID=&profilePhoto_Path=&comment=&specialtyInstrument=&UUID=",
+            "/poetryController/getPoetryList",
+            "/poetryController/getPoetryDetail?poetryID=",
+            "/poetryController/postPoetryData?UUID=&poetryTitle=&postDate=&poetryData_Path=",
+            "/compositionController/getCompositionList",
+            "/compositionController/getCompositionDetail?compositionID=",
+            "/compositionController/postCompositionData?UUID=&compositionTitle=&postDate=&compositionData_Path=",
+            "/musicController/getMusicList",
+            "/musicController/getMusicDetail?musicID=",
+            "/musicController/postMusicData?UUID=&musicTitle=&poet=&composer=&postDate=&poetryData_Path=&compositionData_Path=",
+            "/playingController/getPlayingList",
+            "/playingController/getPlayingDetail?playingID=",
+            "/playingController/postPlayingData?UUID=&playingTitle=&poet=&composer=&postDate=&playingData_Path=",
+            "/mycollectionController/getMycollection?UUID=",
+            "/mycollectionController/deleteMyCollection?UUID=&mycollectionID=",
+            "/mycollectionController/postMycollectionData?UUID=&mycollectionID=",
+        ]
+
+        function set_path() {
+            $("#path_text").text(pathList[0]);
+            create_inputtextbox_query();
+            $("#path>option").each(function (i, e) {
+                $(e).text(pathList[i])
+            })
+        }
+        function create_inputtextbox_query() {
+            $("#input-text-box").html("");
+            if(!$("#path_text").text().match(/\?/)){
+                test()
+                return
+            }
+            let query = $("#path_text").text().match(/^.*\?(.*)/)[1]
+            let q_list = query.split("&");
+            for (const q of q_list) {
+                let label=$(document.createElement("label")).text(q)
+                let input = $(document.createElement("input")).attr("type","text")
+                $("#input-text-box").append(label,input)
+            }
+            $("#input-text-box>input").on("keyup", function (event) {
+                if(event.keyCode==13){
+                    test()
+                }
+            })
+            $($("#input-text-box>input")[0]).focus();
+        }
+        function test() {
+            let path = $("#path_text").text().match(/^.*\?/) || $("#path_text").text();
+            let query = ""
+            $("#input-text-box>input").each(function (i, e) {
+                query=query+$("#input-text-box>label")[i].innerText;
+                query = $("#input-text-box>input").length - 1 == i ? query + $(e).val() : query + $(e).val() + "&";
+            })
+            let url = path + query;
+            open(url, "_blank")
+        }
+        function set_event() {
+            $("#path").on("change", function (event) {
+                $("#path_text").text($("#path>option:selected").text())
+                create_inputtextbox_query();
+            })
+            $("#test-button").on("click", function (event) {
+                test()
+            })
+        }
+
+        $(function () {
+            set_event();
+            set_path();
+        })
+    </script>
+
+
+    <select name="" id="path">
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+    </select>
+    <button id="test-button">Test</button>
+    <p id="path_text"></p>
+    <br>
+    <div id="input-text-box"></div>
+    <br>
+
+
+
+</body>
+
+</html>

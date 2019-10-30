@@ -50,12 +50,3 @@ def postMusicDataDB(musicTitle,poet,composer,contributor,postDate,poetryData_Pat
         result=music_tb+"\n"+str(e)
     DB.close(db)
     return result
-
-
-
-
-
-# test
-# print(getmusicListDB())
-# print(getmusicDetailDB("MU00000002"))
-# print(postmusicDataDB("0000000001","music","test","test","test","2019-01-01","test.txt","test.txt"))

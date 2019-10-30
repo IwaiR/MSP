@@ -32,7 +32,7 @@ def postPoetryData():
     try:
         UUID=params["UUID"]
         try:
-            accountinfo=accountDM.getAccountinfoDB(UUID)[0]
+            accountinfo=accountDM.getAccountInfoDB(UUID)[0]
             accountID=accountinfo["accountID"]
             poet=accountinfo["accountName"]
         except:

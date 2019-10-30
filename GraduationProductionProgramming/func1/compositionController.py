@@ -4,8 +4,8 @@ from DM import compositionDM,accountDM,myCollectionDM
 app = Blueprint('compositionController', __name__)
 
 
-# test http://localhost:5000/compositionController/getPoetryList
-@app.route("/compositionController/getPoetryList",methods=["GET"])
+# test http://localhost:5000/compositionController/getCompositionList
+@app.route("/compositionController/getCompositionList",methods=["GET"])
 def getCompositionList(): 
     compositionList=[]
     compositionList=compositionDM.getCompositionListDB()
@@ -32,7 +32,7 @@ def postCompositionData():
     try:
         UUID=params["UUID"]
         try:
-            accountinfo=accountDM.getAccountinfoDB(UUID)[0]
+            accountinfo=accountDM.getAccountInfoDB(UUID)[0]
             accountID=accountinfo["accountID"]
             composer=accountinfo["accountName"]
         except:

@@ -52,11 +52,3 @@ def postPoetryDataDB(poetryTitle,poet,postDate,poetryData_Path):
     return result
 
         
-
-
-
-# test
-# print(getPoetryListDB())
-# print(getPoetryDetailDB("PO00000001"))
-# print(postPoetryDataDB("0000000001","poetry","test","2019-01-01","test.txt"))
-# print(postPoetryData("00000000001","poetry","test","2019-01-01","test.txt"))

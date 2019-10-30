@@ -51,12 +51,3 @@ def postCompositionDataDB(compositionTitle,composer,postDate,compositionData_Pat
         result=composition_tb+"\n"+str(e)
     DB.close(db)
     return result
-
-
-
-
-
-# test
-# print(getCompositionListDB())
-# print(getCompositionDetailDB("CO00000001"))
-# print(postCompositionDataDB("0000000002","composition","test","2019-01-01","test.txt"))

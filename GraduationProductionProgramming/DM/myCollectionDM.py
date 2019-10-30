@@ -55,19 +55,3 @@ def postMycollectionDataDB(accountID,myCollectionID):
         result=myCollection_tb+"\n"+str(e)
     DB.close(db)
     return result
-
-
-    
-
-
-# test
-# UUID="uuid"
-# accountID="0000000001"
-# accountinfo=getAccountinfoDB(UUID)
-# print(accountinfo)
-# result=getMyCollectionDB(accountID)
-# print(result)
-# print(getAccountinfoDB(UUID))
-# print(deleteMyCollectionDB(accountID,"PL00000002"))
-# print(postMycollectionDataDB("11","dfghjkjhgfdfghjkjhs"))
-

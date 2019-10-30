@@ -50,12 +50,3 @@ def postPlayingDataDB(playingTitle,performer,poet,composer,postDate,playingData_
         result=playing_tb+"\n"+str(e)
     DB.close(db)
     return result
-
-
-
-
-
-# test
-# print(getplayingListDB())
-# print(getplayingDetailDB("PL00000002"))
-# print(postplayingDataDB("0000000001","playing","test","test","test","2019-01-01","test.txt"))
